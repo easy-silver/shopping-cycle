@@ -87,4 +87,36 @@ class PurchaseHistoryTest {
         //then
         assertThat(period).isEqualTo(15L);
     }
+
+    @DisplayName("다음 구매 예정일을 예상한다.")
+    @Test
+    void expectNextPurchaseDate() {
+        //given
+        Stuff shampoo = new Stuff("샴푸");
+        PurchaseHistory history = new PurchaseHistory(shampoo,
+                LocalDate.of(2021, 12, 20),
+                LocalDate.of(2021, 11, 20));
+
+        //when
+        LocalDate nextPurchaseDate = history.expectNextPurchaseDate();
+
+        //then
+        assertThat(nextPurchaseDate).isEqualTo(LocalDate.of(2022, 1, 19));
+    }
+
+    @DisplayName("다음 구매 예정일은 오늘이거나 오늘 이후의 날짜이다.")
+    @Test
+    void expectNextPurchaseDateWhenOld() {
+        //given
+        Stuff shampoo = new Stuff("샴푸");
+        PurchaseHistory history = new PurchaseHistory(shampoo,
+                LocalDate.of(2021, 10, 2),
+                LocalDate.of(2021, 11, 1));
+
+        //when
+        LocalDate nextPurchaseDate = history.expectNextPurchaseDate();
+
+        //then
+        assertThat(nextPurchaseDate).isEqualTo(LocalDate.of(2021, 12, 31));
+    }
 }
