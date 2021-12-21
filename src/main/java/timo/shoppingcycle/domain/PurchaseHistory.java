@@ -1,9 +1,10 @@
 package timo.shoppingcycle.domain;
 
-import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,14 +33,22 @@ public class PurchaseHistory {
         purchaseDates.add(purchaseDate);
     }
 
-    public Duration calculateDuration() {
+    public long calculateAveragePeriod() {
         if (purchaseDates.size() < 2) {
             throw new IllegalArgumentException("구매일 정보가 부족합니다.");
         }
 
-        //TODO. 주기 계산 기능 구현 필요
+        //오름차 순으로 정렬
+        Collections.sort(purchaseDates);
 
-        return null;
+        int sumOfEachPeriod = 0, periodCount = purchaseDates.size() - 1;
+
+        for (int i = 0; i < periodCount; i++) {
+            sumOfEachPeriod += ChronoUnit.DAYS.between(purchaseDates.get(i), purchaseDates.get(i + 1));
+        }
+
+        //평균 계산
+        return sumOfEachPeriod / periodCount;
     }
 
 }
