@@ -8,11 +8,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 구매 이력을 관리하는 클래스
+ * 구매 주기, 다음 구매 예정일 계산을 담당하는 클래스
  */
 public class PurchaseHistory {
 
-    private Stuff stuff;
+    private final Stuff stuff;
     private List<LocalDate> purchaseDates = new ArrayList<>();
 
     public PurchaseHistory(Stuff stuff, LocalDate lastPurchaseDate) {
@@ -23,10 +23,6 @@ public class PurchaseHistory {
     public PurchaseHistory(Stuff stuff, LocalDate ... purchaseDates) {
         this.stuff = stuff;
         this.purchaseDates = Arrays.asList(purchaseDates);
-    }
-
-    public List<LocalDate> getPurchaseDates() {
-        return purchaseDates;
     }
 
     public void addPurchaseDate(LocalDate purchaseDate) {

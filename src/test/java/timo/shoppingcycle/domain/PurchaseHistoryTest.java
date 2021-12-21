@@ -10,21 +10,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PurchaseHistoryTest {
 
-    @DisplayName("구매일을 추가하면 구매이력의 구매일자 리스트 사이즈가 하나 증가한다.")
-    @Test
-    void addPurchaseDate() {
-        //given
-        Stuff shampoo = new Stuff("샴푸");
-        PurchaseHistory shampooPurchaseHistory = new PurchaseHistory(shampoo, LocalDate.now());
-        int beforeSize = shampooPurchaseHistory.getPurchaseDates().size();
-
-        //when
-        shampooPurchaseHistory.addPurchaseDate(LocalDate.of(2021, 10, 14));
-
-        //then
-        assertThat(shampooPurchaseHistory.getPurchaseDates().size()).isEqualTo(beforeSize + 1);
-    }
-
     @DisplayName("구매 주기 계산 시 구매일 정보가 2개 미만이면 IllegalArgumentException 발생한다.")
     @Test
     void calculatePeriodThrowException() {
