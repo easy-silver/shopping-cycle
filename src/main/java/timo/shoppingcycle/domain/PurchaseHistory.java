@@ -23,10 +23,12 @@ public class PurchaseHistory {
     public PurchaseHistory(Stuff stuff, LocalDate ... purchaseDates) {
         this.stuff = stuff;
         this.purchaseDates = Arrays.asList(purchaseDates);
+        Collections.sort(this.purchaseDates);
     }
 
     public void addPurchaseDate(LocalDate purchaseDate) {
         purchaseDates.add(purchaseDate);
+        Collections.sort(purchaseDates);
     }
 
     /**
@@ -37,9 +39,6 @@ public class PurchaseHistory {
         if (purchaseDates.size() < 2) {
             throw new IllegalArgumentException("구매일 정보가 부족합니다.");
         }
-
-        //오름차 순으로 정렬
-        Collections.sort(purchaseDates);
 
         int sumOfEachPeriod = 0, periodCount = purchaseDates.size() - 1;
 
