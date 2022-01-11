@@ -102,6 +102,6 @@ class PurchaseHistoryTest {
         LocalDate nextPurchaseDate = history.expectNextPurchaseDate();
 
         //then
-        assertThat(nextPurchaseDate).isEqualTo(LocalDate.of(2021, 12, 31));
+        assertThat(nextPurchaseDate).isAfter(LocalDate.now());
     }
 }
