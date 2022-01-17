@@ -14,8 +14,8 @@ class PurchaseHistoryTest {
     @Test
     void calculatePeriodThrowException() {
         //given
-        Stuff shampoo = new Stuff("샴푸");
-        PurchaseHistory shampooPurchaseHistory = new PurchaseHistory(shampoo, LocalDate.now());
+        StuffOld shampoo = new StuffOld("샴푸");
+        PurchaseHistoryOld shampooPurchaseHistory = new PurchaseHistoryOld(shampoo, LocalDate.now());
 
         //when, then
         assertThatThrownBy(shampooPurchaseHistory::calculateAveragePeriod)
@@ -26,8 +26,8 @@ class PurchaseHistoryTest {
     @Test
     void calculatePeriodBetweenTwo() {
         //given
-        Stuff shampoo = new Stuff("샴푸");
-        PurchaseHistory history = new PurchaseHistory(shampoo, LocalDate.of(2021, 12, 21));
+        StuffOld shampoo = new StuffOld("샴푸");
+        PurchaseHistoryOld history = new PurchaseHistoryOld(shampoo, LocalDate.of(2021, 12, 21));
         history.addPurchaseDate(LocalDate.of(2021, 11, 21));
 
         //when
@@ -41,8 +41,8 @@ class PurchaseHistoryTest {
     @Test
     void calculatePeriodBetweenThree() {
         //given
-        Stuff toner = new Stuff("토너");
-        PurchaseHistory history = new PurchaseHistory(toner,
+        StuffOld toner = new StuffOld("토너");
+        PurchaseHistoryOld history = new PurchaseHistoryOld(toner,
                 LocalDate.of(2021, 11, 1),
                 LocalDate.of(2021, 11, 11),
                 LocalDate.of(2021, 11, 21));
@@ -58,13 +58,13 @@ class PurchaseHistoryTest {
     @Test
     void calculatePeriodOfMixDays() {
         //given
-        Stuff apple = new Stuff("사과");
+        StuffOld apple = new StuffOld("사과");
         LocalDate date1 = LocalDate.of(2021, 12, 14);
         LocalDate date2 = LocalDate.of(2021, 11, 14);
         LocalDate date3 = LocalDate.of(2021, 10, 15);
         LocalDate date4 = LocalDate.of(2021, 11, 29);
         LocalDate date5 = LocalDate.of(2021, 10, 30);
-        PurchaseHistory history = new PurchaseHistory(apple, date1, date2, date3, date4, date5);
+        PurchaseHistoryOld history = new PurchaseHistoryOld(apple, date1, date2, date3, date4, date5);
 
         //when
         long period = history.calculateAveragePeriod();
@@ -77,8 +77,8 @@ class PurchaseHistoryTest {
     @Test
     void expectNextPurchaseDate() {
         //given
-        Stuff shampoo = new Stuff("샴푸");
-        PurchaseHistory history = new PurchaseHistory(shampoo,
+        StuffOld shampoo = new StuffOld("샴푸");
+        PurchaseHistoryOld history = new PurchaseHistoryOld(shampoo,
                 LocalDate.of(2021, 12, 20),
                 LocalDate.of(2021, 11, 20));
 
@@ -93,8 +93,8 @@ class PurchaseHistoryTest {
     @Test
     void expectNextPurchaseDateWhenOld() {
         //given
-        Stuff shampoo = new Stuff("샴푸");
-        PurchaseHistory history = new PurchaseHistory(shampoo,
+        StuffOld shampoo = new StuffOld("샴푸");
+        PurchaseHistoryOld history = new PurchaseHistoryOld(shampoo,
                 LocalDate.of(2021, 10, 2),
                 LocalDate.of(2021, 11, 1));
 
