@@ -17,4 +17,9 @@ public class PurchaseHistory {
     public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
+
+    public int getVolume() {
+        return volume;
+    }
+
 }
