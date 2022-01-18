@@ -23,7 +23,7 @@ class PurchaseHistoryTest {
         histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 1)));
 
         //when
-        Collections.sort(histories, Comparator.comparing(PurchaseHistory::getPurchaseDate));
+        histories.sort(Comparator.comparing(PurchaseHistory::getPurchaseDate));
 
         //then
         for (PurchaseHistory history : histories) {
