@@ -21,20 +21,19 @@ public class AmountMeasuringCalculator implements MeasuringCalculator {
         histories.sort(Comparator.comparing(PurchaseHistory::getPurchaseDate));
 
         int periodCount = histories.size() - 1;
-        double sumOfPeriod = 0, sumOfVolume = 0;
+        double sumOfPeriod = 0, sumOfCapacity = 0;
 
         //2. 총 사용 용량, 구매 간격 합산
         for (int i = 0; i < periodCount; i++) {
             sumOfPeriod += ChronoUnit.DAYS.between(histories.get(i).getPurchaseDate(),
                     histories.get(i + 1).getPurchaseDate());
-            sumOfVolume += histories.get(i).getVolume();
+            sumOfCapacity += histories.get(i).getCapacity();
         }
 
         System.out.println("sumOfPeriod = " + sumOfPeriod);
-        System.out.println("sumOfVolume = " + sumOfVolume);
+        System.out.println("sumOfCapacity = " + sumOfCapacity);
 
         //3. 용량당 일수로 나눠 1일당 사용랑 계산
-
-        return sumOfVolume / sumOfPeriod;
+        return sumOfCapacity / sumOfPeriod;
     }
 }

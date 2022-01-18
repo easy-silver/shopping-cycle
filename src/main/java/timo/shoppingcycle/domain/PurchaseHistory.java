@@ -5,12 +5,21 @@ import java.time.LocalDate;
 public class PurchaseHistory {
 
     private final String name;
-    private final int volume;
+    private final int capacity;
+    private Unit unit;
+
     private final LocalDate purchaseDate;
 
-    public PurchaseHistory(String name, int volume, LocalDate purchaseDate) {
+    public PurchaseHistory(String name, int capacity, LocalDate purchaseDate) {
         this.name = name;
-        this.volume = volume;
+        this.capacity = capacity;
+        this.purchaseDate = purchaseDate;
+    }
+
+    public PurchaseHistory(String name, int capacity, Unit unit, LocalDate purchaseDate) {
+        this.name = name;
+        this.capacity = capacity;
+        this.unit = unit;
         this.purchaseDate = purchaseDate;
     }
 
@@ -18,8 +27,8 @@ public class PurchaseHistory {
         return purchaseDate;
     }
 
-    public int getVolume() {
-        return volume;
+    public int getCapacity() {
+        return capacity;
     }
 
 }

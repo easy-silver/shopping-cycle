@@ -27,7 +27,7 @@ public class Stuff {
 
         PurchaseHistory lastPurchase = histories.get(histories.size() - 1);
         LocalDate lastDate = lastPurchase.getPurchaseDate();
-        double lastPurchaseVolume = lastPurchase.getVolume();
+        double lastPurchaseVolume = lastPurchase.getCapacity();
 
         //마지막 구매건 용량을 하루당 사용량으로 나눈다.
         int countOfDay = (int) Math.floor(lastPurchaseVolume / useAmountPerDay);
