@@ -1,5 +1,7 @@
 package timo.shoppingcycle.domain;
 
+import timo.shoppingcycle.domain.calculator.MeasuringCalculator;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +9,12 @@ import java.util.List;
 public class Stuff {
 
     private String categoryName;
-    private MeasuringType measuringType;
+    private MeasuringCalculator measuringCalculator;
     private List<PurchaseHistory> histories = new ArrayList<>();
 
-    public Stuff(String categoryName, MeasuringType measuringType, List<PurchaseHistory> histories) {
+    public Stuff(String categoryName, MeasuringCalculator measuringCalculator, List<PurchaseHistory> histories) {
         this.categoryName = categoryName;
-        this.measuringType = measuringType;
+        this.measuringCalculator = measuringCalculator;
         this.histories = histories;
     }
 
@@ -21,11 +23,15 @@ public class Stuff {
             throw new IllegalArgumentException("구매일 정보가 부족합니다.");
         }
 
-        double amountPerDay = measuringType.averageAmountPerDay(histories);
+        double useAmountPerDay = measuringCalculator.calculateUsedPerDay(histories);
 
-        //TODO. 마지막 히스토리의 용량 및, 다음 구매 예정일 계산
+        PurchaseHistory lastPurchase = histories.get(histories.size() - 1);
+        LocalDate lastDate = lastPurchase.getPurchaseDate();
+        double lastPurchaseVolume = lastPurchase.getVolume();
 
-        return null;
+        //마지막 구매건 용량을 하루당 사용량으로 나눈다.
+        int countOfDay = (int) Math.ceil(lastPurchaseVolume / useAmountPerDay);
+        return lastDate.plusDays(countOfDay);
     }
 
 }

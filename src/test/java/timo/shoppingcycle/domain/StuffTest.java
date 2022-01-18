@@ -2,6 +2,7 @@ package timo.shoppingcycle.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import timo.shoppingcycle.domain.calculator.AmountMeasuringCalculator;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,6 +42,26 @@ class StuffTest {
         for (PurchaseHistory history : histories) {
             System.out.println("history.getPurchaseDate() = " + history.getPurchaseDate());
         }
+    }
+
+    @DisplayName("같은 '용량'의 제품 다음 구매 예정일 예측")
+    @Test
+    void predictNextPurchaseDate() {
+        //given
+        List<PurchaseHistory> histories = new ArrayList<>();
+        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 10)));
+        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 20)));
+        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 30)));
+        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2022, 1, 9)));
+
+        Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
+
+        //when
+        LocalDate nextDate = stuff.calculateNextPurchaseDate();
+
+        //then
+        assertThat(nextDate).isAfterOrEqualTo(LocalDate.now());
+        assertThat(nextDate).isEqualTo(LocalDate.of(2022, 1, 19));
     }
 
 }

@@ -11,6 +11,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 용량 계산과 관련된 테스트 케이스
+ */
 class AmountMeasuringCalculatorTest {
 
     @DisplayName("같은 용량의 제품 하루당 사용량 계산")
