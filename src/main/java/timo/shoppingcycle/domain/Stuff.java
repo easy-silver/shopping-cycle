@@ -31,7 +31,10 @@ public class Stuff {
 
         //마지막 구매건 용량을 하루당 사용량으로 나눈다.
         int countOfDay = (int) Math.floor(lastPurchaseVolume / useAmountPerDay);
-        return lastDate.plusDays(countOfDay);
+        LocalDate nextDate = lastDate.plusDays(countOfDay);
+
+        //계산된 구매 예정일이 오늘보다 작으면 오늘로 표현
+        return nextDate.isBefore(LocalDate.now()) ? LocalDate.now() : nextDate;
     }
 
 }

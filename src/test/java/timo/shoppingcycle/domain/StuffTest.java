@@ -83,4 +83,21 @@ class StuffTest {
         assertThat(nextDate).isEqualTo(LocalDate.of(2022, 2, 8));
     }
 
+    @DisplayName("계산된 다음 구매 예정일이 과거일자인 경우 오늘로 표현한다.")
+    @Test
+    void whenBeforeThanToday() {
+        //given
+        List<PurchaseHistory> histories = new ArrayList<>();
+        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 1, 1)));
+        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 1, 31)));
+
+        Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
+
+        //when
+        LocalDate nextPurchaseDate = stuff.calculateNextPurchaseDate();
+
+        //then
+        assertThat(nextPurchaseDate).isAfterOrEqualTo(LocalDate.now());
+    }
+
 }
