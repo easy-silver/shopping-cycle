@@ -13,4 +13,8 @@ public class PurchaseHistory {
         this.volume = volume;
         this.purchaseDate = purchaseDate;
     }
+
+    public LocalDate getPurchaseDate() {
+        return purchaseDate;
+    }
 }
