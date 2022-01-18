@@ -30,7 +30,7 @@ public class Stuff {
         double lastPurchaseVolume = lastPurchase.getVolume();
 
         //마지막 구매건 용량을 하루당 사용량으로 나눈다.
-        int countOfDay = (int) Math.ceil(lastPurchaseVolume / useAmountPerDay);
+        int countOfDay = (int) Math.floor(lastPurchaseVolume / useAmountPerDay);
         return lastDate.plusDays(countOfDay);
     }
 
