@@ -18,9 +18,9 @@ class StuffTest {
     void lessThanTwo() {
         //given
         List<PurchaseHistory> histories = new ArrayList<>();
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2022, 1, 10)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2022, 1, 10)));
 
-        Stuff stuff = new Stuff("세럼", null, histories);
+        Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
 
         //when, then
         assertThatThrownBy(stuff::calculateNextPurchaseDate)
@@ -32,8 +32,8 @@ class StuffTest {
     void sort() {
         //given
         List<PurchaseHistory> histories = new ArrayList<>();
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 31)));
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 1)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2021, 12, 31)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2021, 12, 1)));
 
         //when
         histories.sort(Comparator.comparing(PurchaseHistory::getPurchaseDate));
@@ -49,10 +49,10 @@ class StuffTest {
     void predictNextPurchaseDateWhenSameVolume() {
         //given
         List<PurchaseHistory> histories = new ArrayList<>();
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 10)));
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 20)));
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 30)));
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2022, 1, 9)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2021, 12, 10)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2021, 12, 20)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2021, 12, 30)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2022, 1, 9)));
 
         Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
 
@@ -69,10 +69,10 @@ class StuffTest {
     void predictNextPurchaseDateWhenDifferentVolume() {
         //given
         List<PurchaseHistory> histories = new ArrayList<>();
-        histories.add(new PurchaseHistory("B", 60, LocalDate.of(2021, 12, 20)));
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 10)));
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2022, 1, 29)));
-        histories.add(new PurchaseHistory("B", 60, LocalDate.of(2022, 1, 9)));
+        histories.add(new PurchaseHistory("B", 60, Unit.ml, LocalDate.of(2021, 12, 20)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2021, 12, 10)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2022, 1, 29)));
+        histories.add(new PurchaseHistory("B", 60, Unit.ml, LocalDate.of(2022, 1, 9)));
 
         Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
 
@@ -88,8 +88,8 @@ class StuffTest {
     void whenBeforeThanToday() {
         //given
         List<PurchaseHistory> histories = new ArrayList<>();
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 1, 1)));
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 1, 31)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2021, 1, 1)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2021, 1, 31)));
 
         Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
 
@@ -123,7 +123,7 @@ class StuffTest {
         //given
         List<PurchaseHistory> histories = new ArrayList<>();
         histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2022, 1, 1)));
-        histories.add(new PurchaseHistory("B", 0.3, Unit.l, LocalDate.of(2022, 1, 11)));
+        histories.add(new PurchaseHistory("B", 0.03, Unit.l, LocalDate.of(2022, 1, 11)));
         histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2022, 1, 21)));
 
         Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);

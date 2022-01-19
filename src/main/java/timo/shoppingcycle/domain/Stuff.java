@@ -19,10 +19,6 @@ public class Stuff {
     }
 
     public LocalDate calculateNextPurchaseDate() {
-        if (histories.size() < 2) {
-            throw new IllegalArgumentException("구매일 정보가 부족합니다.");
-        }
-
         double useAmountPerDay = measuringCalculator.calculateUsedPerDay(histories);
 
         PurchaseHistory lastPurchase = histories.get(histories.size() - 1);

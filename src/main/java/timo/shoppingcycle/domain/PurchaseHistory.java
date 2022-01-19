@@ -5,16 +5,10 @@ import java.time.LocalDate;
 public class PurchaseHistory {
 
     private final String name;
-    private final double capacity;
+    private double capacity;
     private Unit unit;
 
     private final LocalDate purchaseDate;
-
-    public PurchaseHistory(String name, double capacity, LocalDate purchaseDate) {
-        this.name = name;
-        this.capacity = capacity;
-        this.purchaseDate = purchaseDate;
-    }
 
     public PurchaseHistory(String name, double capacity, Unit unit, LocalDate purchaseDate) {
         this.name = name;
@@ -31,4 +25,20 @@ public class PurchaseHistory {
         return capacity;
     }
 
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void convertIntoMilliliter() {
+        if (unit != Unit.l) {
+            throw new IllegalArgumentException("밀리리터로 변환할 수 없는 단위입니다.");
+        }
+
+        if (capacity < 0) {
+            throw new IllegalArgumentException("용량이 유효하지 않습니다.");
+        }
+
+        unit = Unit.ml;
+        capacity *= 1000;
+    }
 }

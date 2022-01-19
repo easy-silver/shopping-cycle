@@ -21,9 +21,9 @@ class AmountMeasuringCalculatorTest {
     void sumOfPeriodWhenSameVolume() {
         //given
         List<PurchaseHistory> histories = new ArrayList<>();
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 10)));
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 30)));
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2022, 1, 19)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2021, 12, 10)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2021, 12, 30)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2022, 1, 19)));
 
         //when
         MeasuringCalculator measuringCalculator = new AmountMeasuringCalculator();
@@ -38,9 +38,9 @@ class AmountMeasuringCalculatorTest {
     void sumOfPeriodWhenDifferentVolume() {
         //given
         List<PurchaseHistory> histories = new ArrayList<>();
-        histories.add(new PurchaseHistory("A", 30, LocalDate.of(2021, 12, 10)));
-        histories.add(new PurchaseHistory("B", 50, LocalDate.of(2021, 12, 30)));
-        histories.add(new PurchaseHistory("C", 20, LocalDate.of(2022, 1, 19)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2021, 12, 10)));
+        histories.add(new PurchaseHistory("B", 50, Unit.ml, LocalDate.of(2021, 12, 30)));
+        histories.add(new PurchaseHistory("C", 20, Unit.ml, LocalDate.of(2022, 1, 19)));
 
         //when
         MeasuringCalculator measuringCalculator = new AmountMeasuringCalculator();
