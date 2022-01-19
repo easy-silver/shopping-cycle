@@ -117,4 +117,22 @@ class StuffTest {
         assertThat(nextPurchaseDate).isEqualTo(LocalDate.of(2022, 1, 31));
     }
 
+    @DisplayName("다른 단위의 구매이력 계산")
+    @Test
+    void differentUnit() {
+        //given
+        List<PurchaseHistory> histories = new ArrayList<>();
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2022, 1, 1)));
+        histories.add(new PurchaseHistory("B", 0.3, Unit.l, LocalDate.of(2022, 1, 11)));
+        histories.add(new PurchaseHistory("A", 30, Unit.ml, LocalDate.of(2022, 1, 21)));
+
+        Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
+
+        //when
+        LocalDate nextPurchaseDate = stuff.calculateNextPurchaseDate();
+
+        //then
+        assertThat(nextPurchaseDate).isEqualTo(LocalDate.of(2022, 1, 31));
+    }
+
 }
