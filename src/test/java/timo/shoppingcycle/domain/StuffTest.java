@@ -3,6 +3,7 @@ package timo.shoppingcycle.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import timo.shoppingcycle.domain.calculator.AmountMeasuringCalculator;
+import timo.shoppingcycle.domain.calculator.CountMeasuringCalculator;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -133,6 +134,23 @@ class StuffTest {
 
         //then
         assertThat(nextPurchaseDate).isEqualTo(LocalDate.of(2022, 1, 31));
+    }
+
+    @DisplayName("갯수 단위의 물건 구매 예정일 계산")
+    @Test
+    void calculateCount() {
+        //given
+        List<PurchaseHistory> histories = new ArrayList<>();
+        histories.add(new PurchaseHistory("A", 36, Unit.ea, LocalDate.of(2022, 5, 31)));
+        histories.add(new PurchaseHistory("B", 30, Unit.ea, LocalDate.of(2022, 7, 6)));
+
+        Stuff stuff = new Stuff("화장지", new CountMeasuringCalculator(), histories);
+
+        //when
+        LocalDate nextPurchaseDate = stuff.calculateNextPurchaseDate();
+
+        //then
+        assertThat(nextPurchaseDate).isEqualTo(LocalDate.of(2022, 8, 5));
     }
 
 }

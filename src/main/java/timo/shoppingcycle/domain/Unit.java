@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum Unit {
     ml("밀리리터"),
-    l("리터")
+    l("리터"),
+    ea("개")
     ;
 
     private String title;

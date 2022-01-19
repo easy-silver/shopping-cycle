@@ -3,19 +3,20 @@ package timo.shoppingcycle.domain;
 import timo.shoppingcycle.domain.calculator.MeasuringCalculator;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Stuff {
 
     private String categoryName;
     private MeasuringCalculator measuringCalculator;
-    private List<PurchaseHistory> histories = new ArrayList<>();
+    private List<PurchaseHistory> histories;
 
     public Stuff(String categoryName, MeasuringCalculator measuringCalculator, List<PurchaseHistory> histories) {
         this.categoryName = categoryName;
         this.measuringCalculator = measuringCalculator;
         this.histories = histories;
+        histories.sort(Comparator.comparing(PurchaseHistory::getPurchaseDate));
     }
 
     public LocalDate calculateNextPurchaseDate() {
