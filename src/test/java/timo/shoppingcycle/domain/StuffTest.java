@@ -62,7 +62,6 @@ class StuffTest {
 
         //then
         assertThat(nextDate).isAfterOrEqualTo(LocalDate.now());
-        assertThat(nextDate).isEqualTo(LocalDate.of(2022, 1, 19));
     }
 
     @DisplayName("다른 '용량'의 제품 다음 구매 예정일 예측")

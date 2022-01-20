@@ -36,15 +36,20 @@ public class Stuff {
 
         int countOfDay = calculateCountOfDay(useAmountPerDay, lastPurchase.getCapacity());
 
-        LocalDate nextDate = lastPurchase.getPurchaseDate().plusDays(countOfDay);
-
-        //계산된 구매 예정일이 오늘보다 작으면 오늘로 표현
-        return nextDate.isBefore(LocalDate.now()) ? LocalDate.now() : nextDate;
+        return getNextPurchaseDate(lastPurchase, countOfDay);
     }
 
     /** 하루 평균 사용량과 마지막 구매량으로 전부 사용되기까지 소요되는 일 수 계산 */
     private int calculateCountOfDay(double useAmountPerDay, double lastPurchaseCapacity) {
         return (int) Math.floor(lastPurchaseCapacity / useAmountPerDay);
+    }
+
+    /** 예상 사용일 수에 따른 다음 구메 예정일 계산 */
+    private LocalDate getNextPurchaseDate(PurchaseHistory lastPurchase, int countOfDay) {
+        LocalDate nextDate = lastPurchase.getPurchaseDate().plusDays(countOfDay);
+
+        //계산된 구매 예정일이 오늘보다 작으면 오늘로 표현
+        return nextDate.isBefore(LocalDate.now()) ? LocalDate.now() : nextDate;
     }
 
 }
