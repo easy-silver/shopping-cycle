@@ -27,7 +27,7 @@ class AmountMeasuringCalculatorTest {
 
         //when
         MeasuringCalculator measuringCalculator = new AmountMeasuringCalculator();
-        double amountPerDay = measuringCalculator.calculateUsedPerDay(histories);
+        double amountPerDay = measuringCalculator.calculateUsagePerDay(histories);
 
         //then
         assertThat(amountPerDay).isEqualTo(1.5);
@@ -44,7 +44,7 @@ class AmountMeasuringCalculatorTest {
 
         //when
         MeasuringCalculator measuringCalculator = new AmountMeasuringCalculator();
-        double amountPerDay = measuringCalculator.calculateUsedPerDay(histories);
+        double amountPerDay = measuringCalculator.calculateUsagePerDay(histories);
 
         //then
         assertThat(amountPerDay).isEqualTo(2);

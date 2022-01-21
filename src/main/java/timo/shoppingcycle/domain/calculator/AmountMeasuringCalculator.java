@@ -12,7 +12,7 @@ import java.util.List;
 public class AmountMeasuringCalculator implements MeasuringCalculator {
 
     @Override
-    public double calculateUsedPerDay(List<PurchaseHistory> histories) {
+    public double calculateUsagePerDay(List<PurchaseHistory> histories) {
         if (histories.size() < 2) {
             throw new IllegalArgumentException("구매일 정보가 부족합니다.");
         }

@@ -28,8 +28,8 @@ public class Stuff {
 
     /** 다음 구매 예정일 계산 */
     public LocalDate calculateNextPurchaseDate() {
-        //1일당 사용량 계산
-        double useAmountPerDay = measuringCalculator.calculateUsedPerDay(histories);
+        //하루당 사용량 계산
+        double useAmountPerDay = measuringCalculator.calculateUsagePerDay(histories);
 
         //마지막 구매 이력
         PurchaseHistory lastPurchase = histories.get(histories.size() - 1);
