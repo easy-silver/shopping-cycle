@@ -3,6 +3,8 @@ package timo.shoppingcycle.domain;
 import timo.shoppingcycle.domain.calculator.MeasuringCalculator;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -10,7 +12,12 @@ public class Stuff {
 
     private String categoryName;
     private MeasuringCalculator measuringCalculator;
-    private List<PurchaseHistory> histories;
+    private List<PurchaseHistory> histories = new ArrayList<>();
+
+    public Stuff(String categoryName, MeasuringCalculator measuringCalculator) {
+        this.categoryName = categoryName;
+        this.measuringCalculator = measuringCalculator;
+    }
 
     public Stuff(String categoryName, MeasuringCalculator measuringCalculator, List<PurchaseHistory> histories) {
         this.categoryName = categoryName;
@@ -20,10 +27,16 @@ public class Stuff {
         this.histories.sort(Comparator.comparing(PurchaseHistory::getPurchaseDate));
     }
 
-    /** 구매내역 추가 */
+    /** 구매내역 단 건 추가 */
     public void addHistory(PurchaseHistory history) {
         histories.add(history);
         histories.sort(Comparator.comparing(PurchaseHistory::getPurchaseDate));
+    }
+
+    /** 구매내역 복수 건 추가 */
+    public void addHistory(PurchaseHistory ... histories) {
+        this.histories.addAll(Arrays.asList(histories));
+        this.histories.sort(Comparator.comparing(PurchaseHistory::getPurchaseDate));
     }
 
     /** 다음 구매 예정일 계산 */
