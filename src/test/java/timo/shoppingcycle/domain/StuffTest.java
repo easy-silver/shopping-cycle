@@ -24,7 +24,7 @@ class StuffTest {
         Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
 
         //when, then
-        assertThatThrownBy(stuff::calculateNextPurchaseDate)
+        assertThatThrownBy(stuff::predictNextPurchaseDate)
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -58,7 +58,7 @@ class StuffTest {
         Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
 
         //when
-        LocalDate nextDate = stuff.calculateNextPurchaseDate();
+        LocalDate nextDate = stuff.predictNextPurchaseDate();
 
         //then
         assertThat(nextDate).isAfterOrEqualTo(LocalDate.now());
@@ -77,7 +77,7 @@ class StuffTest {
         Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
 
         //when
-        LocalDate nextDate = stuff.calculateNextPurchaseDate();
+        LocalDate nextDate = stuff.predictNextPurchaseDate();
 
         //then
         assertThat(nextDate).isEqualTo(LocalDate.of(2022, 2, 8));
@@ -94,7 +94,7 @@ class StuffTest {
         Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
 
         //when
-        LocalDate nextPurchaseDate = stuff.calculateNextPurchaseDate();
+        LocalDate nextPurchaseDate = stuff.predictNextPurchaseDate();
 
         //then
         assertThat(nextPurchaseDate).isAfterOrEqualTo(LocalDate.now());
@@ -111,7 +111,7 @@ class StuffTest {
         Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
 
         //when
-        LocalDate nextPurchaseDate = stuff.calculateNextPurchaseDate();
+        LocalDate nextPurchaseDate = stuff.predictNextPurchaseDate();
 
         //then
         assertThat(nextPurchaseDate).isEqualTo(LocalDate.of(2022, 1, 31));
@@ -129,7 +129,7 @@ class StuffTest {
         Stuff stuff = new Stuff("세럼", new AmountMeasuringCalculator(), histories);
 
         //when
-        LocalDate nextPurchaseDate = stuff.calculateNextPurchaseDate();
+        LocalDate nextPurchaseDate = stuff.predictNextPurchaseDate();
 
         //then
         assertThat(nextPurchaseDate).isEqualTo(LocalDate.of(2022, 1, 31));
@@ -146,7 +146,7 @@ class StuffTest {
         Stuff stuff = new Stuff("화장지", new CountMeasuringCalculator(), histories);
 
         //when
-        LocalDate nextPurchaseDate = stuff.calculateNextPurchaseDate();
+        LocalDate nextPurchaseDate = stuff.predictNextPurchaseDate();
 
         //then
         assertThat(nextPurchaseDate).isEqualTo(LocalDate.of(2022, 8, 5));

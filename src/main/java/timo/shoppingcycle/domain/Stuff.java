@@ -39,8 +39,11 @@ public class Stuff {
         this.histories.sort(Comparator.comparing(PurchaseHistory::getPurchaseDate));
     }
 
-    /** 다음 구매 예정일 계산 */
-    public LocalDate calculateNextPurchaseDate() {
+    /**
+     * 하루당 사용량과 마지막 구매 이력으로 다음 구매 예정일 계산
+     * @return 다음 구매 예정일
+     */
+    public LocalDate predictNextPurchaseDate() {
 
         double useAmountPerDay = measuringCalculator.calculateUsagePerDay(histories);
 
@@ -48,7 +51,7 @@ public class Stuff {
 
         int countOfDay = calculateCountOfDay(useAmountPerDay, lastPurchase.getCapacity());
 
-        return getNextPurchaseDate(lastPurchase, countOfDay);
+        return calculateNextPurchaseDate(lastPurchase, countOfDay);
     }
 
     /** 마지막 구매 이력 조회*/
@@ -66,7 +69,7 @@ public class Stuff {
     }
 
     /** 예상 사용일 수에 따른 다음 구메 예정일 계산 */
-    private LocalDate getNextPurchaseDate(PurchaseHistory lastPurchase, int countOfDay) {
+    private LocalDate calculateNextPurchaseDate(PurchaseHistory lastPurchase, int countOfDay) {
         LocalDate nextDate = lastPurchase.getPurchaseDate().plusDays(countOfDay);
 
         //계산된 구매 예정일이 오늘보다 작으면 오늘로 표현
