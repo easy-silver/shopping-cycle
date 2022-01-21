@@ -41,15 +41,23 @@ public class Stuff {
 
     /** 다음 구매 예정일 계산 */
     public LocalDate calculateNextPurchaseDate() {
-        //하루당 사용량 계산
+
         double useAmountPerDay = measuringCalculator.calculateUsagePerDay(histories);
 
-        //마지막 구매 이력
-        PurchaseHistory lastPurchase = histories.get(histories.size() - 1);
+        PurchaseHistory lastPurchase = getLastPurchaseHistory();
 
         int countOfDay = calculateCountOfDay(useAmountPerDay, lastPurchase.getCapacity());
 
         return getNextPurchaseDate(lastPurchase, countOfDay);
+    }
+
+    /** 마지막 구매 이력 조회*/
+    private PurchaseHistory getLastPurchaseHistory() {
+        if (histories.isEmpty()) {
+            throw new IllegalArgumentException("구매이력이 없습니다.");
+        }
+
+        return histories.get(histories.size() - 1);
     }
 
     /** 하루 평균 사용량과 마지막 구매량으로 전부 사용되기까지 소요되는 일 수 계산 */
