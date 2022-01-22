@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * 물건(제품군)
+ */
 public class Stuff {
 
     private String categoryName;

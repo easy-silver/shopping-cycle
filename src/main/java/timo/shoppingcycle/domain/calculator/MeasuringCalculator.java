@@ -10,6 +10,7 @@ import java.util.List;
  */
 public abstract class MeasuringCalculator {
 
+    /** 하루 사용량 계산 */
     public double calculateUsagePerDay(List<PurchaseHistory> histories) {
         validateHistories(histories);
 

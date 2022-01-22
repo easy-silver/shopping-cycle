@@ -2,6 +2,9 @@ package timo.shoppingcycle.domain;
 
 import java.time.LocalDate;
 
+/**
+ * 구매 이력
+ */
 public class PurchaseHistory {
 
     private final String name;
