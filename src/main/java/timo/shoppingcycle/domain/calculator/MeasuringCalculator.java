@@ -19,16 +19,12 @@ public abstract class MeasuringCalculator {
         for (int i = 0; i < periodCount; i++) {
             PurchaseHistory history = histories.get(i);
 
-            convertIntoSameUnit(history);
+            convertIntoSmallerUnit(history);
 
             sumOfPeriod += ChronoUnit.DAYS.between(history.getPurchaseDate(), histories.get(i + 1).getPurchaseDate());
             sumOfCapacity += history.getCapacity();
         }
 
-        System.out.println("sumOfPeriod = " + sumOfPeriod);
-        System.out.println("sumOfCapacity = " + sumOfCapacity);
-
-        //3. 전체 사용량을 총 사용일 수로 나눠 1일당 사용랑 계산
         return sumOfCapacity / sumOfPeriod;
     }
 
@@ -40,8 +36,8 @@ public abstract class MeasuringCalculator {
     }
 
     /**
-     * 단위 일관화
+     * 단위 일관화(더 작은 단위로 변경)
      * @param history
      */
-    protected abstract void convertIntoSameUnit(PurchaseHistory history);
+    protected abstract void convertIntoSmallerUnit(PurchaseHistory history);
 }

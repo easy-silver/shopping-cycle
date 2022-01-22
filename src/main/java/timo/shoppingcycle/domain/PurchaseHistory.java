@@ -30,15 +30,13 @@ public class PurchaseHistory {
     }
 
     public void convertIntoMilliliter() {
-        if (unit != Unit.l) {
-            throw new IllegalArgumentException("밀리리터로 변환할 수 없는 단위입니다.");
-        }
-
         if (capacity < 0) {
             throw new IllegalArgumentException("용량이 유효하지 않습니다.");
         }
 
-        unit = Unit.ml;
-        capacity *= 1000;
+        if (unit == Unit.l) {
+            unit = Unit.ml;
+            capacity *= 1000;
+        }
     }
 }

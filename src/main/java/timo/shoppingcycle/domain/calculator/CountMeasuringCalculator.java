@@ -8,6 +8,6 @@ import timo.shoppingcycle.domain.PurchaseHistory;
 public class CountMeasuringCalculator extends MeasuringCalculator {
 
     @Override
-    protected void convertIntoSameUnit(PurchaseHistory history) {
+    protected void convertIntoSmallerUnit(PurchaseHistory history) {
     }
 }
